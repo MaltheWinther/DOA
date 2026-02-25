@@ -1,0 +1,1 @@
+/usr/bin/clang++ -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/exercise4.dir/projects/exercise4/src/main.cpp.o -o exercise4  libshared_lib.a

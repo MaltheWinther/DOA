@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build",
+  "command": "/usr/bin/clang++  -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/include\" -g -std=gnu++20 -arch arm64 -o CMakeFiles/shared_lib.dir/shared/src/person.cpp.o -c \"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/src/person.cpp\"",
+  "file": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/src/person.cpp",
+  "output": "CMakeFiles/shared_lib.dir/shared/src/person.cpp.o"
+},
+{
+  "directory": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build",
+  "command": "/usr/bin/clang++  -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise1/include\" -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/include\" -g -std=gnu++20 -arch arm64 -o CMakeFiles/exercise1.dir/projects/exercise1/src/main.cpp.o -c \"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise1/src/main.cpp\"",
+  "file": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise1/src/main.cpp",
+  "output": "CMakeFiles/exercise1.dir/projects/exercise1/src/main.cpp.o"
+},
+{
+  "directory": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build",
+  "command": "/usr/bin/clang++  -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise2/include\" -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/include\" -g -std=gnu++20 -arch arm64 -o CMakeFiles/exercise2.dir/projects/exercise2/src/main.cpp.o -c \"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise2/src/main.cpp\"",
+  "file": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise2/src/main.cpp",
+  "output": "CMakeFiles/exercise2.dir/projects/exercise2/src/main.cpp.o"
+},
+{
+  "directory": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build",
+  "command": "/usr/bin/clang++  -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise3/include\" -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/include\" -g -std=gnu++20 -arch arm64 -o CMakeFiles/exercise3.dir/projects/exercise3/src/main.cpp.o -c \"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise3/src/main.cpp\"",
+  "file": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise3/src/main.cpp",
+  "output": "CMakeFiles/exercise3.dir/projects/exercise3/src/main.cpp.o"
+},
+{
+  "directory": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build",
+  "command": "/usr/bin/clang++  -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise5/include\" -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/include\" -g -std=gnu++20 -arch arm64 -o CMakeFiles/exercise5.dir/projects/exercise5/src/main.cpp.o -c \"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise5/src/main.cpp\"",
+  "file": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise5/src/main.cpp",
+  "output": "CMakeFiles/exercise5.dir/projects/exercise5/src/main.cpp.o"
+},
+{
+  "directory": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build",
+  "command": "/usr/bin/clang++  -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise6/include\" -I\"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/shared/include\" -g -std=gnu++20 -arch arm64 -o CMakeFiles/exercise6.dir/projects/exercise6/src/main.cpp.o -c \"/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise6/src/main.cpp\"",
+  "file": "/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/Handin3-4/projects/exercise6/src/main.cpp",
+  "output": "CMakeFiles/exercise6.dir/projects/exercise6/src/main.cpp.o"
+}
+]

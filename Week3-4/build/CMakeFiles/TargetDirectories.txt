@@ -1,0 +1,8 @@
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/shared_lib.dir
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/exercise1.dir
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/exercise2.dir
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/exercise3.dir
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/exercise5.dir
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/exercise6.dir
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/edit_cache.dir
+/Users/malthewinther/Documents/Software Teknologi/3.Semester/DOA/Week3-4/build/CMakeFiles/rebuild_cache.dir
