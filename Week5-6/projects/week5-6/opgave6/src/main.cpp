@@ -14,7 +14,7 @@ void selectionSort(vector<Comparable>& a) {
       }
     }
 
-    // Swap a[i] med det mindste element
+    // Swap a[i] with the smallest element
     Comparable temp = std::move(a[i]);
     a[i] = std::move(a[minIndex]);
     a[minIndex] = std::move(temp);

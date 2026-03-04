@@ -65,7 +65,7 @@ Worst case time complexity for 1.A:
 
 In the worst case, the algorithm checks every element of the array exactly once, resulting in O(N) time complexity for an array of N elements.
 
-Worst case time complexity for 2.A:
+Worst case time complexity for 1.B:
 
 In the worst case, the algorithm checks every element of the array exactly once, resulting in O(N) time complexity for an array of N elements.
 
@@ -111,24 +111,32 @@ Output:
 
 #include <iostream>
 
-void bookletPrint(int startpage, int endpage, int originalStartpage){
+void bookletPrintHelper(int startpage, int endpage, int originalStartpage){
 
     if(startpage > endpage){
         return;
     }
     std::cout << "Sheet " << (startpage-originalStartpage)/2+1 << " contains pages: " << startpage << ", " << startpage+1 << ", " << endpage-1 << ", " << endpage << std::endl;
-    bookletPrint(startpage+2,endpage-2,originalStartpage);
+    bookletPrintHelper(startpage+2,endpage-2,originalStartpage);
 
 }
 
+void bookletPrint(int startPage, int endPage){
+    bookletPrintHelper(startPage, endPage, startPage);
+}
 
 int main() {
 
-    bookletPrint(5,12,5);
+    bookletPrint(5,12); 
 
     return 0;
 }
 ```
+Output:
+
+Sheet 1 contains pages: 5, 6, 11, 12
+
+Sheet 2 contains pages: 7, 8, 9, 10
 
 # Exercise 4
 
@@ -213,6 +221,7 @@ Recursion recipe:
 
    In each recursive call, we move one node forward (node->next) and increment the position — this means we are always progressing towards either finding x or reaching the end (null), so we are guaranteed to reach the base case eventually.
 
+simple_linked_list.h:
 ```cpp
 
 #pragma once
@@ -394,10 +403,10 @@ public:
 
 
 };
+```
 
-
-
-
+main.cpp:
+```cpp
 #include <iostream>
 #include <simple_linked_list.h>
 
@@ -426,7 +435,8 @@ int main() {
 
 ```cpp
 
-void selectionSort(vector<int>& a) {
+template <typename Comparable>
+void selectionSort(vector<Comparable>& a) {
   for (int i = 0; i < a.size(); i++) {
     int minIndex = i;
 
@@ -436,19 +446,19 @@ void selectionSort(vector<int>& a) {
       }
     }
 
-    // Swap a[i] med det mindste element
-    int temp = a[i];
-    a[i] = a[minIndex];
-    a[minIndex] = temp;
+    // Swap a[i] with the smallest element
+    Comparable temp = std::move(a[i]);
+    a[i] = std::move(a[minIndex]);
+    a[minIndex] = std::move(temp);
   }
 }
 
 int main() {
-  vector<int> A {1, 4, 2, 3, 6, 5,20,25};
+  vector<int> A {1, 4, 2, 3, 6, 5,24,25};
 
   vector<int> B {6, 5, 4, 3, 2, 1,14,23,46};
 
-  
+
 
   selectionSort(A);
   selectionSort(B);
@@ -472,7 +482,7 @@ int main() {
 
 Output: ![alt text](image-1.png)
 
-Tidskompleksitet er O(n²) for både best case og worst case — den indre løkke kører altid fuldt ud, uanset om arrayet allerede er sorteret.
+The time complexity is O(n²) for both best case and worst case — the inner loop always runs in full, regardless of whether the array is already sorted.
 
 # Exercise 7
 
@@ -521,16 +531,9 @@ int main() {
 
 ```
 
-Tidskompleksitet: Counting sort har tidskompleksitet med O(n+k), hvis k er større end n, hvilket er worst case. Hvis k er lig med eller mindre end n, så er tidskompleksiteten O(n), hvilket er best case. 
+Time complexity: Counting sort has a time complexity of O(n+k), where n is the number of elements and k is the largest value. The algorithm always performs the same amount of work regardless of input. When k ≤ n, n dominates and it simplifies to O(n). When k >> n, k dominates and the algorithm becomes inefficient.
 
-Space complexity:  Vi skal allokerer 2 arrays, et output array med størrelse n og et count-array med størrelse k+1. Derfor bliver space complexiteten O(n+k). Her er worst case = base case.
-
-
-Chattens:
-
-Tidskompleksitet: Counting sort har tidskompleksitet O(n+k), hvor n er antal elementer og k er den største værdi. Algoritmen udfører altid det samme arbejde uanset input. Når k ≤ n dominerer n, og det forenkles til O(n). Når k >> n dominerer k, og algoritmen bliver ineffektiv.
-
-Space complexity: Vi allokerer 2 arrays, et output array med størrelse n og et count-array med størrelse k+1. Derfor er space complexity altid O(n+k), da begge arrays allokeres uanset input.
+Space complexity: We allocate 2 arrays: an output array of size n and a count array of size k+1. Therefore the space complexity is always O(n+k), since both arrays are allocated regardless of input.
 
 
 
@@ -538,6 +541,7 @@ Space complexity: Vi allokerer 2 arrays, et output array med størrelse n og et 
 # Exercise 8
 
 
+quick_sort.h:
 ```cpp
 
 #ifndef _QUICK_SORT_H_
@@ -595,8 +599,10 @@ void quickSort(vector<Comparable>& a, int left, int right) {
 		insertionSort(a.begin() + left, a.begin()+right+1);
 	}
 }
+```
 
-
+main.cpp:
+```cpp
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -648,15 +654,18 @@ int main() {
 
 
 ```
+Argumentation for input sizes: We chose N = 100, 1000, 10000 and 100000 to cover a broad spectrum. N=100 shows baseline performance, N=1000 and N=10000 show how the algorithms scale, and N=100000 stresses the algorithms enough to make differences in time complexity clearly visible. The sizes increase by a factor of 10, making it easy to observe O(n log n) growth.
+
 Output from test, using different UseInsertion values:
 
+```
 Testing our IntroSort (useInsertion = 4)
 N = 100          Time: 28 microseconds
 N = 1000         Time: 183 microseconds
 N = 10000        Time: 2022 microseconds
 N = 100000       Time: 23999 microseconds
 
-Testing std::sort 
+Testing std::sort
 N = 100          Time: 4 microseconds
 N = 1000         Time: 26 microseconds
 N = 10000        Time: 274 microseconds
@@ -669,7 +678,7 @@ N = 1000         Time: 193 microseconds
 N = 10000        Time: 2367 microseconds
 N = 100000       Time: 25954 microseconds
 
-Testing std::sort 
+Testing std::sort
 N = 100          Time: 4 microseconds
 N = 1000         Time: 26 microseconds
 N = 10000        Time: 273 microseconds
@@ -682,12 +691,11 @@ N = 1000         Time: 269 microseconds
 N = 10000        Time: 3049 microseconds
 N = 100000       Time: 33335 microseconds
 
-Testing std::sort 
+Testing std::sort
 N = 100          Time: 4 microseconds
 N = 1000         Time: 26 microseconds
 N = 10000        Time: 273 microseconds
 N = 100000       Time: 3098 microseconds
-
 
 
 Testing our IntroSort (useInsertion = 64)
@@ -696,13 +704,14 @@ N = 1000         Time: 377 microseconds
 N = 10000        Time: 4357 microseconds
 N = 100000       Time: 52564 microseconds
 
-Testing std::sort 
+Testing std::sort
 N = 100          Time: 4 microseconds
 N = 1000         Time: 29 microseconds
 N = 10000        Time: 309 microseconds
 N = 100000       Time: 3520 microseconds
+```
 
 
-We can see that our IntroSort performs best when UseImplement = 16, but UseImplement = 4 is right behind it. When we set UseImplement equals to 32 and 64, the performance drops dramatically as InsertionSort starts to dominate with its slower O(N^2). 
+We can see that our IntroSort performs best when useInsertion = 16, but useInsertion = 4 is right behind it. When we set useInsertion equals to 32 and 64, the performance drops dramatically as InsertionSort starts to dominate with its slower O(N^2). 
 
 std::sort is faster because it is a mature, heavily optimized implementation with additional optimizations like heapSort fallback and better pivot selection.
