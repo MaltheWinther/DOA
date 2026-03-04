@@ -423,6 +423,286 @@ int main() {
 
 # Exercise 6
 
+
+```cpp
+
+void selectionSort(vector<int>& a) {
+  for (int i = 0; i < a.size(); i++) {
+    int minIndex = i;
+
+    for (int j = i + 1; j < a.size(); j++) {
+      if (a[j] < a[minIndex]) {
+        minIndex = j;
+      }
+    }
+
+    // Swap a[i] med det mindste element
+    int temp = a[i];
+    a[i] = a[minIndex];
+    a[minIndex] = temp;
+  }
+}
+
+int main() {
+  vector<int> A {1, 4, 2, 3, 6, 5,20,25};
+
+  vector<int> B {6, 5, 4, 3, 2, 1,14,23,46};
+
+  
+
+  selectionSort(A);
+  selectionSort(B);
+
+  std::cout << "Test A:" << std::endl;
+
+  for (int i = 0; i < A.size(); i++) {
+    cout << A[i] << endl;
+  }
+
+  std::cout << "Test B:" << std::endl;
+
+  for (int i = 0; i < B.size(); i++) {
+    cout << B[i] << endl;
+  }
+
+  return 0;
+}
+
+```
+
+Output: ![alt text](image-1.png)
+
+Tidskompleksitet er O(n²) for både best case og worst case — den indre løkke kører altid fuldt ud, uanset om arrayet allerede er sorteret.
+
 # Exercise 7
 
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> countingSort(const vector<int>& input, int k) {
+    vector<int> count(k + 1, 0);
+    vector<int> output(input.size());
+
+   
+    for (int i = 0; i < input.size(); i++) {
+        count[input[i]] = count[input[i]] + 1;
+    }
+
+   
+    for (int i = 1; i <= k; i++) {
+        count[i] = count[i] + count[i - 1];
+    }
+
+    
+    for (int i = input.size() - 1; i >= 0; i--) {
+        int j = input[i];
+        count[j] = count[j] - 1;
+        output[count[j]] = input[i];
+    }
+
+    return output;
+}
+
+int main() {
+    vector<int> A {8,2,1,6};
+
+    vector<int> sorted = countingSort(A, 8); // Output [1,2,6,8]
+
+    for (int i = 0; i < sorted.size(); i++) {
+        cout << sorted[i] << " ";
+    }
+    cout << endl; 
+
+    return 0;
+}
+
+```
+
+Tidskompleksitet: Counting sort har tidskompleksitet med O(n+k), hvis k er større end n, hvilket er worst case. Hvis k er lig med eller mindre end n, så er tidskompleksiteten O(n), hvilket er best case. 
+
+Space complexity:  Vi skal allokerer 2 arrays, et output array med størrelse n og et count-array med størrelse k+1. Derfor bliver space complexiteten O(n+k). Her er worst case = base case.
+
+
+Chattens:
+
+Tidskompleksitet: Counting sort har tidskompleksitet O(n+k), hvor n er antal elementer og k er den største værdi. Algoritmen udfører altid det samme arbejde uanset input. Når k ≤ n dominerer n, og det forenkles til O(n). Når k >> n dominerer k, og algoritmen bliver ineffektiv.
+
+Space complexity: Vi allokerer 2 arrays, et output array med størrelse n og et count-array med størrelse k+1. Derfor er space complexity altid O(n+k), da begge arrays allokeres uanset input.
+
+
+
+
 # Exercise 8
+
+
+```cpp
+
+#ifndef _QUICK_SORT_H_
+#define _QUICK_SORT_H_
+
+#include <vector>
+#include <cassert>
+#include "insertion_sort.h"
+using namespace std;
+
+
+const int useInsertion = 16; // Value to decide when to go from quick-sort into insertion-sort.
+
+template <typename Comparable>
+int partition(vector<Comparable>& a, int left, int right) {
+	int center = (left + right) / 2;
+
+	if (a[center] < a[left])
+		std::swap(a[left], a[center]);
+	if (a[right] < a[left])
+		std::swap(a[left], a[right]);
+	if (a[right] < a[center])
+		std::swap(a[center], a[right]);
+
+	// Place pivot at position right - 1
+	std::swap(a[center], a[right - 1]);
+
+	// Now the partitioning
+	Comparable& pivot = a[right - 1];
+	int i = left, j = right - 1;
+	do {
+		while (a[++i] < pivot);
+		while (pivot < a[--j]);
+		if (i < j) {
+			std::swap(a[i], a[j]);
+		}
+	} while (i < j);
+
+	std::swap(a[i], a[right - 1]);	// Restore pivot
+	return i;
+}
+
+
+template <typename Comparable>
+void quickSort(vector<Comparable>& a, int left, int right) {
+
+
+	assert(left >= 0 && right < (int)a.size());
+
+	if (right-left+1 > useInsertion) {
+		int i = partition(a, left, right);
+		quickSort(a, left, i - 1);
+		quickSort(a, i + 1, right);
+	} else {
+		insertionSort(a.begin() + left, a.begin()+right+1);
+	}
+}
+
+
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <algorithm>
+#include "quick_sort.h"
+
+using namespace std;
+using namespace std::chrono;
+
+vector<int> generateRandom(int size) { //Generates a random number to fill our vector with.
+    vector<int> v(size);
+    auto f = []() -> int { return rand() % 1000000; };
+    generate(v.begin(), v.end(), f);
+    return v;
+}
+
+int main() {
+    vector<int> sizes = {100, 1000, 10000, 100000};
+
+    cout << "Testing our IntroSort (useInsertion = " << useInsertion << ")" << endl;
+
+    for (int size : sizes) {
+        vector<int> v = generateRandom(size);
+
+        auto start = high_resolution_clock::now();
+        quickSort(v);
+        auto stop = high_resolution_clock::now();
+
+        auto duration = duration_cast<microseconds>(stop - start);
+        cout << "N = " << size << " \t Time: " << duration.count() << " microseconds" << endl;
+    }
+
+    cout << endl;
+    cout << "Testing std::sort " << endl;
+
+    for (int size : sizes) {
+        vector<int> v = generateRandom(size);
+
+        auto start = high_resolution_clock::now();
+        sort(v.begin(), v.end());
+        auto stop = high_resolution_clock::now();
+
+        auto duration = duration_cast<microseconds>(stop - start);
+        cout << "N = " << size << " \t Time: " << duration.count() << " microseconds" << endl;
+    }
+
+    return 0;
+}
+
+
+```
+Output from test, using different UseInsertion values:
+
+Testing our IntroSort (useInsertion = 4)
+N = 100          Time: 28 microseconds
+N = 1000         Time: 183 microseconds
+N = 10000        Time: 2022 microseconds
+N = 100000       Time: 23999 microseconds
+
+Testing std::sort 
+N = 100          Time: 4 microseconds
+N = 1000         Time: 26 microseconds
+N = 10000        Time: 274 microseconds
+N = 100000       Time: 3177 microseconds
+
+
+Testing our IntroSort (useInsertion = 16)
+N = 100          Time: 16 microseconds
+N = 1000         Time: 193 microseconds
+N = 10000        Time: 2367 microseconds
+N = 100000       Time: 25954 microseconds
+
+Testing std::sort 
+N = 100          Time: 4 microseconds
+N = 1000         Time: 26 microseconds
+N = 10000        Time: 273 microseconds
+N = 100000       Time: 3111 microseconds
+
+
+Testing our IntroSort (useInsertion = 32)
+N = 100          Time: 24 microseconds
+N = 1000         Time: 269 microseconds
+N = 10000        Time: 3049 microseconds
+N = 100000       Time: 33335 microseconds
+
+Testing std::sort 
+N = 100          Time: 4 microseconds
+N = 1000         Time: 26 microseconds
+N = 10000        Time: 273 microseconds
+N = 100000       Time: 3098 microseconds
+
+
+
+Testing our IntroSort (useInsertion = 64)
+N = 100          Time: 27 microseconds
+N = 1000         Time: 377 microseconds
+N = 10000        Time: 4357 microseconds
+N = 100000       Time: 52564 microseconds
+
+Testing std::sort 
+N = 100          Time: 4 microseconds
+N = 1000         Time: 29 microseconds
+N = 10000        Time: 309 microseconds
+N = 100000       Time: 3520 microseconds
+
+
+We can see that our IntroSort performs best when UseImplement = 16, but UseImplement = 4 is right behind it. When we set UseImplement equals to 32 and 64, the performance drops dramatically as InsertionSort starts to dominate with its slower O(N^2). 
+
+std::sort is faster because it is a mature, heavily optimized implementation with additional optimizations like heapSort fallback and better pivot selection.
